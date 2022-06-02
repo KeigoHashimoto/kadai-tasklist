@@ -28,10 +28,15 @@
 
     <div class="mt-3 d-flex  ">
         <div class="ml-2">
-            {!! link_to_route('tasks.edit','タスクの編集',['task'=>$tasks->id],['class'=>'btn btn-danger']) !!}
+            {!! link_to_route('tasks.edit','タスクの編集',['task'=>$tasks->id],['class'=>'btn btn-warning']) !!}
         </div>
         <div class="ml-2">
             {!! link_to_route('tasks.index','一覧に戻る',[],['class'=>'btn btn-primary']) !!}
+        </div>
+        <div class="ml-2">
+            {!! Form::model($tasks,['route'=>['tasks.destroy',$tasks->id],'method'=>'delete']) !!}
+                {!! Form::submit('削除',['class'=>'btn btn-danger']) !!}
+            {!! Form::close() !!}
         </div>
     </div>
 
