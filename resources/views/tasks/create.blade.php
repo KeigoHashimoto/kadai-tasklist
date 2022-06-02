@@ -11,6 +11,12 @@
                 {!! Form::label('content','タスク' )!!}
                 {!! Form::text('content',null,['class'=>'form-control']) !!}
             </div>
+            
+            <div class="form-group">
+                {!! Form::label('status','ステータス' )!!}
+                {!! Form::text('status',null,['class'=>'form-control']) !!}
+            </div>
+            
             <div class="form-group">
                 {!! Form::label('date','タイムリミット') !!}
                 {!! Form::date('date',null,['class'=>'form-control']) !!}

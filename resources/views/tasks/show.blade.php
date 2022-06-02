@@ -10,13 +10,15 @@
             <thead>
                 <tr>
                     <th>タスク</th>
+                    <th>ステータス</th>
                     <th>タイムリミット</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$tasks->content}}</td>
-                    <td>{{$tasks->date}}</td>
+                    <td>{{ $tasks->content }}</td>
+                    <td>{{ $tasks->status }}</td>
+                    <td>{{ $tasks->date }}</td>
                 </tr>
             </tbody>
         </div>
@@ -24,7 +26,14 @@
     
 </table>
 
-    {!! link_to_route('tasks.edit','タスクの編集',['task'=>$tasks->id],['class'=>'btn btn-danger']) !!}
+    <div class="mt-3 d-flex  ">
+        <div class="ml-2">
+            {!! link_to_route('tasks.edit','タスクの編集',['task'=>$tasks->id],['class'=>'btn btn-danger']) !!}
+        </div>
+        <div class="ml-2">
+            {!! link_to_route('tasks.index','一覧に戻る',[],['class'=>'btn btn-primary']) !!}
+        </div>
+    </div>
 
 
 @endsection

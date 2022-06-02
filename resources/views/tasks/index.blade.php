@@ -10,6 +10,7 @@
                 <th>view</th>
                 <th>check</th>
                 <th>task</th>
+                <th>status</th>
                 <th>limit</th>
             </tr>
         </thead>
@@ -21,7 +22,8 @@
                         <td>{!! Form::submit('完了',['class'=>'btn btn-danger'])!!}</td>
                     {!! Form::close() !!}
                     <td class="text-left">{{$task->content}}</td>
-                    <td>{{$task->date}}</td>
+                    <td>{{ $task->status }}</td>
+                    <td>{{ $task->date }}</td>
                 </tr>
             @endforeach
         </tbody>
