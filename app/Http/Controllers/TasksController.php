@@ -15,8 +15,18 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $task=Task::all();
-        return view('tasks.index',['tasks'=>$task]);
+        $data=[];
+        if(\Auth::check()){
+            $user=\Auth::user();
+            $tasks=$user->tasks()->orderBy('created_at','desc')->paginate(10);
+            
+            $data=[
+                'user'=>$user,
+                'tasks'=>$tasks,
+                ];
+            
+        }
+        return view('tasks.index',$data);
     }
 
     /**
@@ -45,11 +55,11 @@ class TasksController extends Controller
             'content'=>'required|max:255',
             ]);
         
-        $task=new Task;
-        $task->status=$request->status;
-        $task->content=$request->content;
-        $task->date=$request->date;
-        $task->save();
+        $request->user()->tasks()->create([
+            'content'=>$request->content,
+            'status'=>$request->status,
+            'date'=>$request->date,
+            ]);
         
         return redirect('/');
     }
@@ -94,10 +104,13 @@ class TasksController extends Controller
             ]);
         
         $task=Task::findOrFail($id);
-        $task->status=$request->status;
-        $task->content=$request->content;
-        $task->date=$request->date;
-        $task->save();
+        if(\Auth::id() === $task->user_id){
+            $request->user()->task()->put([
+                'status'=>$request->status,
+                'content'=>$request->content,
+                'date'=>$request->date,
+                ]);
+        }
         
         return redirect('/');
     }
@@ -110,9 +123,12 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $task=Task::findOrFail($id);
-        $task->delete();
+        $task=\App\Task::findorFail($id);
         
-        return redirect("/");
+        if(\Auth::id()===$task->user_id){
+            $task->delete();
+        }
+        
+        return back();
     }
 }
