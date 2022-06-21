@@ -20,11 +20,11 @@
             </div>
             <div class="form-group">
                 {!! Form::label('password','Password')!!}
-                {!! Form::password('password',null,['class'=>'form-controll']) !!}
+                {!! Form::password('password',['class'=>'form-controll']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('password_confirmation','Confirmation')!!}
-                {!! Form::password('password_confirmation',null,['class'=>'form-controll']) !!}
+                {!! Form::password('password_confirmation',['class'=>'form-controll']) !!}
             </div>
             
             {!! Form::submit('Sign up!',['class'=>'btn btn-primary btn-block']) !!}
